@@ -1,0 +1,339 @@
+/*!
+  game.css
+  Visual system for Tic Tac Toe
+  All rights reserved to UZAIR-NAWAZ.
+*/
+
+/* CSS Reset (small, intentional) */
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --muted: #9aa3b2;
+  --accent: #7dd3fc;
+  --accent-2: #60a5fa;
+  --surface: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
+  --glass: rgba(255,255,255,0.02);
+  --glass-2: rgba(255,255,255,0.01);
+  --success: #34d399;
+  --danger: #f87171;
+  --shadow: 0 6px 18px rgba(2,6,23,0.6);
+  --radius: 14px;
+  --radius-small: 8px;
+  --glass-border: rgba(255,255,255,0.03);
+  --text: #E6EEF8;
+  --muted-2: #A6B7CB;
+  --transition-fast: 160ms cubic-bezier(.2,.9,.3,1);
+  --transition-medium: 280ms cubic-bezier(.2,.9,.3,1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 600px at 10% 20%, rgba(96,165,250,0.06), transparent 8%),
+              radial-gradient(800px 600px at 90% 80%, rgba(125,211,252,0.04), transparent 10%),
+              var(--bg);
+  color: var(--text);
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 24px;
+}
+
+/* Container */
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 18px;
+  min-height: calc(100vh - 48px);
+}
+
+/* Header */
+.header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--glass-border);
+}
+
+.brand .title {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: 0.2px;
+}
+.brand .subtitle {
+  margin: 0;
+  margin-top: 6px;
+  color: var(--muted-2);
+  font-size: 13px;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.control-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 120px;
+}
+.control-row label {
+  font-size: 12px;
+  color: var(--muted-2);
+}
+select, button {
+  padding: 8px 12px;
+  border-radius: var(--radius-small);
+  border: 1px solid var(--glass-border);
+  background: var(--card);
+  color: var(--text);
+  outline: none;
+  font-size: 14px;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+select:focus, button:focus {
+  box-shadow: 0 6px 18px rgba(96,165,250,0.08);
+  transform: translateY(-1px);
+}
+.btn {
+  cursor: pointer;
+}
+.btn.primary {
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  color: #031926;
+  font-weight: 600;
+  border: none;
+}
+.btn.small {
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+/* Game area */
+.gameboard-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.status {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.01);
+  border: 1px solid var(--glass-border);
+  color: var(--muted-2);
+  font-weight: 600;
+}
+
+/* Layout of board + sidebar */
+.game-area {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Board styling */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(88px, 1fr));
+  grid-auto-rows: minmax(88px, 1fr);
+  gap: 12px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.02));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 36px rgba(2,6,23,0.45);
+  min-height: 360px;
+}
+
+/* Cells */
+.cell {
+  background: linear-gradient(180deg, rgba(255,255,255,0.008), rgba(0,0,0,0.03));
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--text);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  user-select: none;
+  border: 1px solid rgba(255,255,255,0.02);
+  position: relative;
+}
+.cell:focus {
+  outline: none;
+  box-shadow: 0 12px 28px rgba(96,165,250,0.06);
+  transform: translateY(-4px);
+}
+
+/* Hover effect only on pointer devices */
+@media (hover: hover) {
+  .cell:hover {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+/* X and O styles */
+.cell.x { color: #FFD166; text-shadow: 0 2px 8px rgba(255,209,102,0.12); }
+.cell.o { color: #60a5fa; text-shadow: 0 2px 8px rgba(96,165,250,0.12); }
+
+/* winning line overlay */
+.win-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 6px;
+  transform-origin: center;
+  background: linear-gradient(90deg, rgba(96,165,250,0.3), rgba(125,211,252,0.5));
+  border-radius: 6px;
+  z-index: 30;
+  pointer-events: none;
+  transition: opacity 280ms ease;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 360px;
+}
+.scoreboard h2, .history h3, .tips h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--muted-2);
+}
+.scores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+.score-item {
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border: 1px solid rgba(255,255,255,0.02);
+}
+.score-label { color: var(--muted-2); font-size: 13px; }
+.score-value { font-size: 20px; font-weight: 700; color: var(--text); }
+
+/* History list */
+.history-list {
+  list-style: none;
+  margin: 8px 0 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.history-list li {
+  font-size: 13px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.01);
+  border: 1px solid rgba(255,255,255,0.02);
+}
+
+/* Footer */
+.footer {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.01);
+  border: 1px solid var(--glass-border);
+  color: var(--muted-2);
+}
+
+/* Responsive */
+@media (max-width: 920px) {
+  .game-area {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    order: 2;
+  }
+  .board {
+    order: 1;
+  }
+}
+
+/* Accessibility helpers */
+.hidden-visually {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+}
+
+/* Animations for mark insertion */
+.mark-anim {
+  animation: markPop 260ms cubic-bezier(.2,.9,.3,1);
+}
+@keyframes markPop {
+  0% { transform: scale(.4); opacity: 0; }
+  60% { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Win highlight */
+.cell.win {
+  box-shadow: 0 16px 42px rgba(125,211,252,0.06);
+  transform: translateY(-8px) scale(1.03);
+}
+
+/* subtle info text */
+.meta { font-size: 12px; color: var(--muted-2); }
+
+/* small utility classes */
+.center { display:flex; align-items:center; justify-content:center; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; font-size: 13px; }
+
+/* dark/light theme variations (toggle toggles class 'light' on body) */
+body.light {
+  --bg: #f6f9fc;
+  --card: #ffffff;
+  --text: #0b1520;
+  --muted-2: #4b5563;
+  --glass-border: rgba(9,12,18,0.04);
+  --surface: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(255,255,255,0.02));
+  background: radial-gradient(700px 300px at 10% 20%, rgba(96,165,250,0.06), transparent 8%),
+              radial-gradient(500px 300px at 90% 80%, rgba(125,211,252,0.03), transparent 10%),
+              var(--bg);
+}

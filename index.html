@@ -1,0 +1,119 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Tic Tac Toe — Polished Web Game</title>
+
+  <meta name="description" content="A polished Tic Tac Toe web game with high-quality design and AI difficulty options." />
+
+  <!-- All rights reserved to UZAIR-NAWAZ -->
+
+  <!-- CSS & JS Links -->
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+</head>
+
+<body>
+  <main id="app" class="app">
+    <header class="header">
+      <div class="brand">
+        <h1 class="title">Tic Tac Toe</h1>
+        <p class="subtitle">Classic strategy. Modern polish.</p>
+      </div>
+
+      <div class="controls">
+        <div class="control-row">
+          <label for="mode-select">Mode</label>
+          <select id="mode-select" aria-label="Game mode" title="Choose Player vs Player or Player vs Computer">
+            <option value="pvp">Player vs Player</option>
+            <option value="pvc">Player vs Computer</option>
+          </select>
+        </div>
+
+        <div class="control-row" id="ai-controls" aria-hidden="true">
+          <label for="ai-level">AI Level</label>
+          <select id="ai-level" aria-label="AI difficulty">
+            <option value="easy">Easy</option>
+            <option value="difficult">Difficult</option>
+            <option value="hard">Full Hard</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <label for="player-symbol">You play</label>
+          <select id="player-symbol" aria-label="Play as X or O">
+            <option value="X">X</option>
+            <option value="O">O</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <label for="theme-toggle">Theme</label>
+          <button id="theme-toggle" class="btn small">Toggle</button>
+        </div>
+
+        <div class="control-row">
+          <button id="start-btn" class="btn primary">Start / Restart</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="gameboard-section">
+      <div class="status" id="status" role="status" aria-live="polite">
+        Ready — choose options and press Start
+      </div>
+
+      <div class="game-area">
+        <div id="board" class="board" role="grid" aria-label="Tic Tac Toe board" tabindex="0">
+          <!-- 9 cells rendered by JS -->
+        </div>
+
+        <aside class="sidebar">
+          <div class="scoreboard" aria-label="Scoreboard">
+            <h2>Scoreboard</h2>
+            <div class="scores">
+              <div class="score-item">
+                <div class="score-label">Player X</div>
+                <div id="score-x" class="score-value">0</div>
+              </div>
+              <div class="score-item">
+                <div class="score-label">Player O</div>
+                <div id="score-o" class="score-value">0</div>
+              </div>
+              <div class="score-item">
+                <div class="score-label">Draws</div>
+                <div id="score-draw" class="score-value">0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="history" aria-label="Game history">
+            <h3>Last Results</h3>
+            <ul id="history-list" class="history-list" aria-live="polite"></ul>
+          </div>
+
+          <div class="tips">
+            <h3>Tips</h3>
+            <ul>
+              <li>Center is strongest first move.</li>
+              <li>Block opponent forks early.</li>
+              <li>Try the corners if the center is taken.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> UZAIR-NAWAZ — All rights reserved.</div>
+      <div class="meta">Built with care — accessible, responsive, and local AI.</div>
+    </footer>
+  </main>
+
+  <script src="game.js" defer></script>
+</body>
+</html>
+
